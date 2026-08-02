@@ -65,7 +65,7 @@ $$
 
 This means that instead of having to check huge numbers, I can just keep multiplying `rem` by 10 and recalculating the remainder. Here's what I mean:
 
-Let's say we already have the remainder when $`n=3`$. $`10^{3-1}=100`$, and $`100\bmod{19}=5`$. Instead of now calculating the remainder for $`n=4`$, or $`10^{4-1}=1000`$, I can say that $`a=100`$, $`b=10`$, and $`m=19`$, and use the formula above:
+Let's say we already have the remainder when $`n=3`$: $`10^{3-1}=100`$, and $`100\bmod{19}=5`$. Instead of now calculating the remainder for $`n=4`$, or $`10^{4-1}=1000`$, I can say that $`a=100`$, $`b=10`$, and $`m=19`$, and use the formula above:
 
 $$
 ((100\bmod{19})\times(10\bmod{19}))\bmod{19}=(100\times 10)\bmod{19}
@@ -83,11 +83,11 @@ $$
 
 Just by using this property, we've gone from a 4-digit number to a 2-digit number, and this benefit only gets more apparent as numbers scale. Finally, we can run `findMinN()` to find that the lowest number of digits *x* can have is a whopping 18!
 ### `findX()`
-This function finds the actual number that meets our requirements. Its only parameter is `n`, which comes from `findMinN()`. First, we initialize a `result` variable, which will contain the value of *x* after the function completes, and a `power` variable, both of which are of type `long long`. `power` is set to $`10^{n-1}`$ using a `for` loop instead of `std::pow`, since we are dealing with `long long`s, not `double`s. Next, we define `numerator`, which will be equal to $`d(10^{n-1}-2)`$, `p`, which is *x* without its last digit, `pcopy`, and `pdigits`, a digit counter for `p`.
+This function finds the actual number that meets our requirements. Its only parameter is `n`, which comes from `findMinN()`. First, we initialize the variables `x` and `power`, both of which are of type `long long`. `power` is set to $`10^{n-1}`$ using a `for` loop instead of `std::pow`, since we are dealing with `long long`s, not `double`s. Next, we define `numerator`, which will be equal to $`d(10^{n-1}-2)`$, `p`, which is `x` without its last digit, `pcopy`, and `pdigits`, a digit counter for `p`.
 
-Now, we move into the `for` loop. This loop iterates over `d` from 1 to 9, and `break`s as soon as it finds a result. We know this order will only produce the smallest possible *x* because `d` becomes the first digit of $`2x`$, and we find the lowest `d` that works. Inside the `for` loop, we initialize `numerator`, `p`, `pcopy`, and `pdigits`. Then, we use `pcopy` and `pdigits` in a `while` loop to count the number of digits in `p`. This step is crucial, since `p` must have $`n-1`$ digits (1 less digit than *x* has) in order for the solution to be valid. If `p` meets this requirement, we have our answer. We can set `result` equal to $`10p+d`$ using our equation we defined at the beginning, and we can `break` the `for` loop. Finally, we return `result`.
+Now, we move into the `for` loop. This loop iterates over `d` from 1 to 9, and `break`s as soon as it finds a result. We know this order will only produce the smallest possible `x` because `d` becomes the first digit of $`2x`$, and we find the lowest `d` that works. Inside the `for` loop, we initialize `numerator`, `p`, `pcopy`, and `pdigits`. Then, we use `pcopy` and `pdigits` in a `while` loop to count the number of digits in `p`. This step is crucial, since `p` must have $`n-1`$ digits (1 less digit than `x` has) in order for the solution to be valid. If `p` meets this requirement, we have our answer. We can set `x` equal to $`10p+d`$ using our equation we defined at the beginning, and we can `break` the `for` loop. Finally, we return `x`.
 ## Output
-Given the nature of the problem, this program produces the same output every time, displaying the values of *n*, *x*, and $`2x`$. I lined up the values of *x* and $`2x`$ so that it was clear how the digits were manipulated.
+Given the nature of the problem, this program produces the same output every time, displaying the values of *n*, *x*, and $`2x`$. I lined up the values of *x* and $`2x`$ so that it is clear how the digits were manipulated.
 ```
 Minimum digits of x: 18
  x =  105263157894736842
