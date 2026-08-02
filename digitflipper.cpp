@@ -1,4 +1,3 @@
-#include<cmath>
 #include<iostream>
 
 /*
@@ -23,7 +22,7 @@ Finds x, the lowest number where moving its last digit to the
 front of the number results in 2x.
 */
 long long findX(int n){
-    long long result = 0;
+    long long x;
     long long power = 1;
     for(int i = 0; i < n - 1; i++){
         power *= 10;
@@ -46,18 +45,20 @@ long long findX(int n){
         }
 
         if(pdigits == n - 1){
-            result = p * 10 + d;
+            x = p * 10 + d;
             break;
         }
     }
 
-    return result;
+    return x;
 }
 
 int main(){
+    // Find and print n
     int n = findMinN();
     std::cout << "Minimum digits of x: " << n << std::endl;
 
+    // Find and print x and 2x
     long long x = findX(n);
     std::cout << " x =  " << x << std::endl;
     std::cout << "2x = " << 2 * x << std::endl;
